@@ -3,3 +3,4 @@
 @src=src
 @test=test
 @script=script
+@safe-utils/=lib/safe-utils/src/
