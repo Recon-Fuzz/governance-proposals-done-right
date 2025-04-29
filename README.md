@@ -20,7 +20,7 @@ forge script script/Counter.s.sol --rpc-url base -vvvv --account $ACCOUNT --broa
 
 ### 2. Go on Basescan and see you can correctly write/read from the contract
 
-![Basescan UI](assets/basescan-ui.png)
+<img src="assets/basescan-ui.png" alt="Basescan UI">
 
 [increment tx](https://basescan.org/tx/0x8a22852c6f8175e20ce573b616b1f012fa7ca5c19be16e925eb5f266c7ccecd1)
 
@@ -39,11 +39,11 @@ $ cast calldata 'reinitialize(uint256)' 2
 0xffb6c6b60000000000000000000000000000000000000000000000000000000000000002
 ```
 
-![Upgrade UI](assets/upgrade-ui.png)
+<img src="assets/upgrade-ui.png" alt="Upgrade UI">
 
 Optionally, Simulate on Tenderly to make sure everything is right:
 
-![Tenderly UI](assets/tenderly-ui.png)
+<img src="assets/tenderly" alt="Tenderly UI">
 
 [upgrade tx](https://basescan.org/tx/0x91d888c4dc23f26022fab7d8eebdc4c39a60ff63c8c3a0b26ad4bd48d240bded)
 
@@ -59,7 +59,7 @@ Optionally, Simulate on Tenderly to make sure everything is right:
 forge script script/ProposeSafeTxUpgradeCounterV3.s.sol --rpc-url base -vvvv --account $ACCOUNT --broadcast --verify --ffi
 ```
 
-![Upgrade UI](assets/upgrade-ui-2.png)
+<img src="assets/upgrade-ui-2.png" alt="Upgrade UI">
 
 [CounterV3](https://basescan.org/address/0x9CAaECbc5B36ae272f8C7D7Ab742C5BC343a4cc6)
 
@@ -77,7 +77,7 @@ Approve through the Safe UI
 forge script script/ProposeSafeTxUpgradeCounterV4WithLedger.s.sol --rpc-url base -vvvv --account $ACCOUNT --broadcast --verify --ffi
 ```
 
-![Upgrade UI](assets/upgrade-ui-3.png)
+<img src="assets/upgrade-ui-3.png" alt="Upgrade UI">
 
 [CounterV4](https://basescan.org/address/0x5979587e9aC95873Bab9B1874E8265093975A41E)
 
