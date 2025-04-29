@@ -3,11 +3,11 @@ pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import {CounterV2} from "@src/CounterV2.sol";
+import {CounterV3} from "@src/CounterV3.sol";
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {Safe} from "@safe-utils/Safe.sol";
 
-contract ProposeSafeTxUpgradeCounterScript is Script {
+contract ProposeSafeTxUpgradeCounterV3Script is Script {
     using Safe for *;
 
     Safe.Client safe;
@@ -23,15 +23,13 @@ contract ProposeSafeTxUpgradeCounterScript is Script {
     function run() public {
         vm.startBroadcast();
 
-        CounterV2 v2 = new CounterV2();
+        CounterV3 v3 = new CounterV3();
 
         vm.stopBroadcast();
 
         safe.proposeTransaction(
             address(counter),
-            abi.encodeCall(
-                UUPSUpgradeable.upgradeToAndCall, (address(v2), abi.encodeCall(CounterV2.reinitialize, (42)))
-            ),
+            abi.encodeCall(UUPSUpgradeable.upgradeToAndCall, (address(v3), abi.encodeCall(CounterV3.reinitialize, (2)))),
             signer
         );
     }

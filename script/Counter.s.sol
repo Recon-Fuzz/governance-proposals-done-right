@@ -7,15 +7,17 @@ import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.s
 
 contract CounterScript is Script {
     Counter public counter;
+    address public owner;
 
-    function setUp() public {}
+    function setUp() public {
+        owner = vm.envAddress("SAFE_ADDRESS");
+    }
 
     function run() public {
         vm.startBroadcast();
 
-        counter = Counter(
-            address(new ERC1967Proxy(address(new Counter()), abi.encodeCall(Counter.initialize, (address(this)))))
-        );
+        counter =
+            Counter(address(new ERC1967Proxy(address(new Counter()), abi.encodeCall(Counter.initialize, (owner)))));
 
         vm.stopBroadcast();
     }
