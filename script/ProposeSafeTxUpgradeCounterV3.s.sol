@@ -12,12 +12,14 @@ contract ProposeSafeTxUpgradeCounterV3Script is Script {
 
     Safe.Client safe;
     address counter;
-    address signer;
+    address foundrySigner1 = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
+    bytes32 foundrySigner1PrivateKey = 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
+
+    // NOTE: this method is not recommended, please refer to the `ProposeSafeTxUpgradeCounterV4WithLedger.s.sol` script for a better approach
 
     function setUp() public {
         safe.initialize(vm.envAddress("SAFE_ADDRESS"));
         counter = vm.envAddress("COUNTER_ADDRESS");
-        signer = vm.envAddress("SIGNER_ADDRESS");
     }
 
     function run() public {
@@ -27,10 +29,11 @@ contract ProposeSafeTxUpgradeCounterV3Script is Script {
 
         vm.stopBroadcast();
 
+        vm.rememberKey(uint256(foundrySigner1PrivateKey));
         safe.proposeTransaction(
             address(counter),
             abi.encodeCall(UUPSUpgradeable.upgradeToAndCall, (address(v3), abi.encodeCall(CounterV3.reinitialize, (2)))),
-            signer
+            foundrySigner1
         );
     }
 }
